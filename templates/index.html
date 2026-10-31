@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101010">
+  <title>StreamFlix — Movies for your mood</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍿</text></svg>">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="/static/js/script.js" defer></script>
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="/" aria-label="StreamFlix home">STREAM<span>FLIX</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a class="active" href="#home">Home</a>
+      <a href="#movies">Movies</a>
+      <a href="#movies">My List</a>
+    </nav>
+    <div class="nav-actions">
+      <label class="search-wrap" for="movie-search">
+        <span aria-hidden="true">⌕</span>
+        <input id="movie-search" type="search" placeholder="Search titles" autocomplete="off">
+      </label>
+      <button id="sync-button" class="sync-button" type="button">Refresh titles</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow">YOUR NEXT FAVORITE</p>
+        <h1>Stories worth<br><span>staying in for.</span></h1>
+        <p class="hero-copy">Explore popular films, find something new, and build your own watchlist.</p>
+        <a class="primary-button" href="#movies">Explore movies <span aria-hidden="true">→</span></a>
+        <p class="hero-note">A personal movie-catalog demo. Streaming playback is not included.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-circle circle-one"></div>
+        <div class="art-circle circle-two"></div>
+        <div class="art-card"><span>SF</span><small>YOUR FILM NIGHT</small></div>
+      </div>
+    </section>
+
+    <section class="catalog section-wrap" id="movies">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">THE COLLECTION</p>
+          <h2>Popular right now</h2>
+        </div>
+        <p id="movie-count" class="movie-count">Loading titles…</p>
+      </div>
+      <div id="status-message" class="status-message" role="status" aria-live="polite"></div>
+      <div id="movie-grid" class="movie-grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="/">STREAM<span>FLIX</span></a>
+    <p>Movie metadata demo · Not affiliated with Netflix or TMDB.</p>
+  </footer>
+  <!-- Movie Details Modal (Popup) -->
+<div id="movieModal" class="modal hidden">
+    <div class="modal-overlay" onclick="closeModal()"></div>
+    <div class="modal-content">
+        <button class="close-btn" onclick="document.getElementById('movieModal').classList.add('hidden'); document.body.style.overflow = 'auto';">&times;</button>
+        
+        <!-- Backdrop Image -->
+        <div class="modal-backdrop">
+            <img id="modal-backdrop-img" src="" alt="Backdrop">
+            <div class="backdrop-gradient"></div>
+        </div>
+        
+        <!-- Details -->
+        <div class="modal-body">
+            <h2 id="modal-title">Movie Title</h2>
+            <div class="modal-meta">
+                <span id="modal-rating">⭐ 0.0</span>
+                <span id="modal-date">Release Date</span>
+            </div>
+            <p id="modal-overview">Movie overview will appear here...</p>
+            
+            <div class="modal-actions">
+                <button class="play-btn" onclick="playMovie()">▶ Play</button>
+                <button class="add-btn">+ My List</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Video Player Modal -->
+<div id="videoPlayerModal" class="modal hidden" style="z-index: 9999; background: rgba(0,0,0,0.95);">
+    
+    <!-- X बटन (स्क्रीन के कोने में, वीडियो से पूरी तरह अलग) -->
+    <button onclick="closeVideoPlayer()" style="position: fixed; top: 30px; right: 30px; z-index: 100000; background: #e50914; color: white; border: none; border-radius: 50%; width: 50px; height: 50px; font-size: 30px; cursor: pointer; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.8); font-weight: bold;">
+        &times;
+    </button>
+
+    <!-- वीडियो का बॉक्स -->
+    <div class="video-container" style="position: relative; width: 90%; max-width: 1200px; aspect-ratio: 16 / 9; background: black; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.9);">
+        
+        <!-- VidSrc का Iframe -->
+        <iframe id="videoPlayer" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width: 100%; height: 100%;"></iframe>
+        
+    </div>
+</div>
+
+</body>
+</html>
