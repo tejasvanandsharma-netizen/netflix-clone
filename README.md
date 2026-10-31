@@ -1,4 +1,9 @@
 # StreamFlix — FastAPI + SQLAlchemy starter
+# StreamFlix 🎬
+
+🔴 **[Click Here to View the Live Website](https://netflix-clone-jar7.onrender.com)**
+
+A Netflix-style movie catalog built with FastAPI, SQLAlchemy, and JavaScript.
 
 A small Netflix-style **movie catalog** demo built with FastAPI, SQLAlchemy, SQLite, Jinja2, CSS, and JavaScript. It imports movie metadata from TMDB when you provide an API key. It does **not** provide movie streaming or scrape MX Player/Netflix.
 
