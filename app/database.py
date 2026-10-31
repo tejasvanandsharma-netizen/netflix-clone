@@ -2,7 +2,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./movies.db"
+import os
+# Render के लिए /tmp फोल्डर का इस्तेमाल करें, वहाँ लिखने की परमिशन होती है
+SQLALCHEMY_DATABASE_URL = "sqlite:////tmp/movies.db"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
